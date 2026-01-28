@@ -1,8 +1,8 @@
 import React from 'react'
 import { INCOME_CATEGORY_ID } from '@features/budget/constants/incomeCategory'
 import { DashboardCategory } from '@features/dashboard/types'
-import { Button, Paper, Stack, Typography } from '@mui/material'
-import { PercentLine } from '@shared/components'
+import { Button, Stack, Typography } from '@mui/material'
+import { PercentLine, StyledPaper } from '@shared/components'
 import { ROUTES } from '@shared/constants/routes'
 import { useTranslate } from '@shared/hooks'
 import { useNavigate } from 'react-router'
@@ -23,14 +23,7 @@ export const BudgetBlock = React.memo(({ categories, budgetLimit }: Props) => {
   }, 0)
 
   return (
-    <Paper
-      sx={{
-        p: 3,
-        borderRadius: '24px',
-        maxWidth: { xs: 'auto', md: '400px' },
-        minWidth: '300px',
-      }}
-    >
+    <StyledPaper>
       <Stack spacing={1}>
         <Typography variant="h4">{title}</Typography>
 
@@ -48,6 +41,6 @@ export const BudgetBlock = React.memo(({ categories, budgetLimit }: Props) => {
           </Button>
         )}
       </Stack>
-    </Paper>
+    </StyledPaper>
   )
 })

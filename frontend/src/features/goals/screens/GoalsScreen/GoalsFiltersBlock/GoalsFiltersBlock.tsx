@@ -46,12 +46,11 @@ export const GoalsFiltersBlock = ({ filters }: Props) => {
           />
         </Stack>
 
-        {filters.tags?.length > 0 ||
-          (filters.priority?.length > 0 && (
-            <Button onClick={handleClearFilters} sx={{ height: 'min-content' }} variant="yellow">
-              {translate('clear')}
-            </Button>
-          ))}
+        {(filters.tags?.length > 0 || filters.priority?.length > 0) && (
+          <Button onClick={handleClearFilters} sx={{ height: 'min-content' }} variant="yellow">
+            {translate('clear')}
+          </Button>
+        )}
       </Stack>
 
       {(localTags.length > 0 || localPriority.length > 0) && (

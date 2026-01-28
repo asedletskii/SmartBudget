@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from 'react'
 import { BudgetBlock, DashboardScreenSkeleton, GoalsBlock } from '@features/dashboard/screens'
 import {
-  getDashboardData,
+  getDashboardCategories,
+  getDashboardGoals,
   selectBudgetLimit,
   selectCategories,
   selectGoals,
@@ -17,7 +18,7 @@ import { CenterLabel } from '@shared/types/components'
 import { mapDashboardCategory } from '@shared/utils/transactionsBlockAdapters'
 import dayjs from 'dayjs'
 
-export default withAuth(function DashboardScreen() {
+export default function DashboardScreen() {
   const dispatch = useAppDispatch()
   const translate = useTranslate('Dashboard')
   const translateMonth = useTranslate('Month')
@@ -73,7 +74,8 @@ export default withAuth(function DashboardScreen() {
   }
 
   useEffect(() => {
-    dispatch(getDashboardData())
+    dispatch(getDashboardGoals())
+    dispatch(getDashboardCategories())
   }, [dispatch])
 
   return (
@@ -115,4 +117,4 @@ export default withAuth(function DashboardScreen() {
       </Stack>
     </ScreenContent>
   )
-})
+}

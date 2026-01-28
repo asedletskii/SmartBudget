@@ -3,7 +3,7 @@ import { dashboardRoutes } from '@features/dashboard/routes'
 import { settingsRoutes } from '@features/settings/routes'
 import { transactionsRoutes } from '@features/transactions/routes'
 import { authRoutes } from '@shared/screens'
-import { Route, Routes, useLocation } from 'react-router'
+import { Navigate, Route, Routes, useLocation } from 'react-router'
 import { goalsRoutes } from 'src/features/goals/routes'
 
 export const PageRouter = () => {
@@ -12,6 +12,8 @@ export const PageRouter = () => {
 
   return (
     <Routes location={state?.backgroundLocation || location}>
+      <Route path="/" element={<Navigate to="/main" replace />} />
+
       <Route path="/">
         {authRoutes.pages}
 

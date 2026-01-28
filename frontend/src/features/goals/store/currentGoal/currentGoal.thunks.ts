@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { goalsApi, goalsMock } from '@features/goals/api'
+import { goalsMock } from '@features/goals/api'
 import {
   EditGoalPayload,
   Goal,
@@ -67,7 +66,7 @@ export const updateGoalStatus = createAsyncThunk<
   { state: RootState; rejectWithValue: string }
 >('updateGoalStatus', async ({ ...payload }, { rejectWithValue }) => {
   try {
-    const response = await goalsApi.updateGoalStatus(payload)
+    const response = await goalsMock.updateGoalStatus(payload)
 
     return response
   } catch (e: any) {

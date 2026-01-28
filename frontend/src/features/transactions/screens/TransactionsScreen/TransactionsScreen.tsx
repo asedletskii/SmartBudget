@@ -9,7 +9,6 @@ import {
 } from '@features/transactions/store'
 import { CancelOutlined } from '@mui/icons-material'
 import { Box, Paper, Stack, Typography } from '@mui/material'
-import { withAuth } from '@shared/components'
 import { ScreenContent } from '@shared/components/ScreenContent'
 import { useTranslate } from '@shared/hooks'
 import { useAppDispatch, useAppSelector } from '@shared/store'
@@ -17,7 +16,7 @@ import { CategoryFilter } from './CategoryFilter'
 import { TransactionsList } from './TransactionList'
 import { TransactionsScreenSkeleton } from './TransactionsScreenSkeleton'
 
-export default withAuth(function TransactionsScreen() {
+export default function TransactionsScreen() {
   const dispatch = useAppDispatch()
   const translate = useTranslate('Transactions')
 
@@ -100,4 +99,4 @@ export default withAuth(function TransactionsScreen() {
       )}
     </ScreenContent>
   )
-})
+}

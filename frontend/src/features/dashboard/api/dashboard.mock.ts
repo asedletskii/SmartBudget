@@ -1,4 +1,8 @@
-import { DashboardResponsePayload } from '@features/dashboard/types'
+import {
+  DashboardCategory,
+  DashboardGoal,
+  DashboardResponsePayload,
+} from '@features/dashboard/types'
 
 class DashboardMock {
   baseUrl = ''
@@ -11,49 +15,30 @@ class DashboardMock {
         { name: 'Машина', targetValue: 2000000, currentValue: 200 },
       ],
       categories: [
-        {
-          categoryId: 1,
-          value: 100,
-          type: 'income',
-        },
-        {
-          categoryId: 2,
-          value: 200,
-          type: 'expense',
-        },
-        {
-          categoryId: 3,
-          value: 300,
-          type: 'expense',
-        },
-        {
-          categoryId: 4,
-          value: 400,
-          type: 'income',
-        },
-        {
-          categoryId: 5,
-          value: 500,
-          type: 'income',
-        },
-        {
-          categoryId: 6,
-          value: 600,
-          type: 'income',
-        },
-        {
-          categoryId: 7,
-          value: 700,
-          type: 'income',
-        },
-        {
-          categoryId: 8,
-          value: 800,
-          type: 'income',
-        },
+        { categoryId: 1, value: 100, type: 'income' },
+        { categoryId: 2, value: 200, type: 'expense' },
+        { categoryId: 3, value: 300, type: 'expense' },
+        { categoryId: 4, value: 400, type: 'income' },
+        { categoryId: 5, value: 500, type: 'income' },
+        { categoryId: 6, value: 600, type: 'income' },
+        { categoryId: 7, value: 700, type: 'income' },
+        { categoryId: 8, value: 800, type: 'income' },
       ],
       budgetTotalLimit: 20000,
     }
+  }
+
+  async getDashboardGoals(): Promise<{ goals: DashboardGoal[] }> {
+    const data = await this.getDashboardData()
+    return { goals: data.goals }
+  }
+
+  async getDashboardCategories(): Promise<{
+    categories: DashboardCategory[]
+    budgetTotalLimit: number
+  }> {
+    const data = await this.getDashboardData()
+    return { categories: data.categories, budgetTotalLimit: 10000 }
   }
 }
 

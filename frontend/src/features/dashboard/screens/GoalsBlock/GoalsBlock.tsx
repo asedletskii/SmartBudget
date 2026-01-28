@@ -1,5 +1,6 @@
 import { DashboardGoal } from '@features/dashboard/types'
-import { Button, Paper, Stack, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
+import { StyledPaper } from '@shared/components/StyledPaper'
 import { ROUTES } from '@shared/constants/routes'
 import { useTranslate } from '@shared/hooks'
 import { useNavigate } from 'react-router'
@@ -16,14 +17,7 @@ export const GoalsBlock = ({ goals }: Props) => {
   const title = goals.length > 0 ? translate('title') : translate('emptyTitle')
 
   return (
-    <Paper
-      sx={{
-        p: 3,
-        borderRadius: '24px',
-        maxWidth: { xs: 'auto', md: '400px' },
-        minWidth: '300px',
-      }}
-    >
+    <StyledPaper>
       <Typography variant="h4">{title}</Typography>
 
       <Stack spacing={2}>
@@ -48,6 +42,6 @@ export const GoalsBlock = ({ goals }: Props) => {
           {translate('createButton')}
         </Button>
       </Stack>
-    </Paper>
+    </StyledPaper>
   )
 }
