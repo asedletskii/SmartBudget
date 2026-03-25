@@ -1,9 +1,10 @@
 import React from 'react'
 import { INCOME_CATEGORY_ID } from '@features/budget/constants/incomeCategory'
 import { DashboardCategory } from '@features/dashboard/types'
+import { calcBudgetStats } from '@features/dashboard/utils'
 import { Button, Stack, Typography } from '@mui/material'
 import { PercentLine, StyledPaper } from '@shared/components'
-import { ROUTES } from '@shared/constants/routes'
+import { ROUTES } from '@shared/constants'
 import { useTranslate } from '@shared/hooks'
 import { useNavigate } from 'react-router'
 
@@ -22,13 +23,21 @@ export const BudgetBlock = React.memo(({ categories, budgetLimit }: Props) => {
     return sum
   }, 0)
 
+  if (!categories.length && budgetLimit === 0) return null
+
   return (
-    <StyledPaper>
+    <StyledPaper
+      paperSx={{
+        p: 3,
+        maxWidth: { xs: 'auto', md: '400px' },
+        minWidth: '300px',
+      }}
+    >
       <Stack spacing={1}>
         <Typography variant="h4">{title}</Typography>
 
-        {categories.length > 0 && budgetLimit !== 0 && (
-          <PercentLine currentValue={currentValue} limit={budgetLimit} />
+        {categories.length > 0 && (
+          <PercentLine currentValue={calcBudgetStats(categories)} limit={budgetLimit} />
         )}
 
         {!categories.length && (
