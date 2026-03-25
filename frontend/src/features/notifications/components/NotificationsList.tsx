@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import 'dayjs/locale/ru'
-import { getTransactions } from '@features/transactions/store'
-import { TransactionsBlock, TransactionsFilters } from '@features/transactions/types'
+import { getNotifications } from '@features/notifications/store'
+import { NotificationsBlock } from '@features/notifications/types'
 import { Typography } from '@mui/material'
 import { ListFooter, MUIComponents } from '@shared/components/GroupedVirtuoso'
 import { useTranslate } from '@shared/hooks'
@@ -9,24 +9,23 @@ import { useAppDispatch } from '@shared/store'
 import { normalizeBlocks } from '@shared/utils'
 import dayjs from 'dayjs'
 import { GroupedVirtuoso } from 'react-virtuoso'
-import { TransactionLine } from './TransactionLine'
+import { NotificationItem } from './NotificationItem'
 
 type Props = {
   isLast: boolean
   isLoading: boolean
-  transactions: TransactionsBlock[]
-  appliedFiltersRef: React.RefObject<TransactionsFilters>
+  notifications: NotificationsBlock[]
 }
 
-export const TransactionsList = ({ isLast, isLoading, transactions, appliedFiltersRef }: Props) => {
+export const NotificationsList = ({ isLast, isLoading, notifications }: Props) => {
   const dispatch = useAppDispatch()
   const translate = useTranslate('ListDate')
 
-  const normalizedBlocks = useMemo(() => normalizeBlocks(transactions), [transactions])
+  const normalizedBlocks = useMemo(() => normalizeBlocks(notifications), [notifications])
 
   const loadMore = useCallback(() => {
-    dispatch(getTransactions(appliedFiltersRef.current))
-  }, [dispatch, appliedFiltersRef])
+    dispatch(getNotifications())
+  }, [dispatch])
 
   const formatGroupDate = (inputDate: string) => {
     const date = dayjs(inputDate)
@@ -39,20 +38,21 @@ export const TransactionsList = ({ isLast, isLoading, transactions, appliedFilte
 
   return (
     <GroupedVirtuoso
-      style={{ height: '100%' }}
+      style={{ height: '100vh' }}
+      defaultItemHeight={65}
       components={{
         ...MUIComponents,
         Footer: () => <ListFooter isLast={isLast} isLoading={isLoading} />,
       }}
-      useWindowScroll
       increaseViewportBy={{ bottom: 400, top: 0 }}
+      useWindowScroll
       overscan={200}
       groupCounts={normalizedBlocks.groupCounts}
       endReached={() => (!isLoading && !isLast ? loadMore() : null)}
       groupContent={(index) => (
         <Typography variant="h4">{formatGroupDate(normalizedBlocks.groups[index])}</Typography>
       )}
-      itemContent={(index) => <TransactionLine transaction={normalizedBlocks.items[index]} />}
+      itemContent={(index) => <NotificationItem notification={normalizedBlocks.items[index]} />}
     />
   )
 }
