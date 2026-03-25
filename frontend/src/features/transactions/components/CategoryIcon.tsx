@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/static-components */
 import { ShoppingBagOutlined } from '@mui/icons-material'
 import { Box, SxProps } from '@mui/material'
-import { CATEGORIES_ICONS_MAP } from '@shared/constants/categoriesIcons'
+import { CATEGORIES_ICONS_MAP } from '@shared/constants'
 
 type Props = {
   categoryId: number

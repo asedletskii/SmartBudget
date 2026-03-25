@@ -1,4 +1,4 @@
-import { goalsMock } from '@features/goals/api'
+import { goalsApi, goalsMock } from '@features/goals/api'
 import {
   EditGoalPayload,
   Goal,

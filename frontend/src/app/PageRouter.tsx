@@ -3,7 +3,8 @@ import { dashboardRoutes } from '@features/dashboard/routes'
 import { settingsRoutes } from '@features/settings/routes'
 import { transactionsRoutes } from '@features/transactions/routes'
 import { authRoutes } from '@shared/screens'
-import { Navigate, Route, Routes, useLocation } from 'react-router'
+import { UndefinedScreen } from '@shared/screens/UndefinedScreen'
+import { Route, Routes, useLocation } from 'react-router'
 import { goalsRoutes } from 'src/features/goals/routes'
 
 export const PageRouter = () => {
@@ -27,6 +28,8 @@ export const PageRouter = () => {
 
         {budgetRoutes.pages}
       </Route>
+
+      <Route path="*" element={<UndefinedScreen />} />
     </Routes>
   )
 }
