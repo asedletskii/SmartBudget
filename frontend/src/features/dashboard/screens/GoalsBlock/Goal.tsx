@@ -12,7 +12,7 @@ export const Goal = ({ title, targetValue, currentValue }: Props) => {
     <Stack direction={'row'} spacing={2} sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Typography>{title}</Typography>
 
-      <Typography>{`${formatCurrency(currentValue)} / ${formatCurrency(totalValue)}`}</Typography>
+      <Typography>{`${formatCurrency(currentValue)} / ${formatCurrency(targetValue)}`}</Typography>
     </Stack>
   )
 }

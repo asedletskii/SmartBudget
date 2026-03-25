@@ -8,7 +8,7 @@ class DashboardMock {
 
   private goals: DashboardGoal[] = goalNames.map((name, i) => ({
     name,
-    totalValue: 10000 + i * 5000,
+    targetValue: 10000 + i * 5000,
     currentValue: Math.floor(Math.random() * (10000 + i * 5000)),
   }))
 
@@ -40,19 +40,6 @@ class DashboardMock {
       categories: [...this.categories],
       budgetTotalLimit: this.budgetTotalLimit,
     }
-  }
-
-  async getDashboardGoals(): Promise<{ goals: DashboardGoal[] }> {
-    const data = await this.getDashboardData()
-    return { goals: data.goals }
-  }
-
-  async getDashboardCategories(): Promise<{
-    categories: DashboardCategory[]
-    budgetTotalLimit: number
-  }> {
-    const data = await this.getDashboardData()
-    return { categories: data.categories, budgetTotalLimit: 10000 }
   }
 }
 
